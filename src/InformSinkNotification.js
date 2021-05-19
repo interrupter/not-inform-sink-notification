@@ -25,7 +25,7 @@ try{
 				let	text = hb.compile(options.templates.text),
 						title = hb.compile(options.templates.subject),
 						notifyOptions = {
-							ownerId: message.ownerId,
+							owner: 		message.owner,
 							ownerModel: message.ownerModel,
 							title: 		title(message), 		// Subject line
 							text: 		text(message)
