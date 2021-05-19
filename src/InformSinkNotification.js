@@ -16,7 +16,9 @@ try{
 
 		deploy(message, rule){
 			try{
-				let Notification = notNode.Application.getLogic('Notification');
+				let
+					options = {},
+					Notification = notNode.Application.getLogic('Notification');
 				if(rule && rule.getData()){
 					options = Object.assign(options, rule.getData());
 				}

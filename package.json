@@ -1,6 +1,6 @@
 {
 	"name": "not-inform-sink-notification",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "not-* family info sink via notification in not- environment",
 	"main": "index.js",
 	"scripts": {
@@ -19,7 +19,7 @@
 		"not-node",
 		"inform",
 		"sink",
-		"mail"
+		"notification"
 	],
 	"author": "interrupter <alex.repin@mail.ru> (http://github.com/interrupter)",
 	"license": "ISC",
