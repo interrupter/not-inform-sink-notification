@@ -32,15 +32,18 @@ try{
 			if(rule && rule.getData()){
 				options = Object.assign(options, rule.getData());
 			}
-
 			let	text = hb.compile(options.templates.text),
 					title = hb.compile(options.templates.subject),
+					link = options.templates.link?hb.compile(options.templates.link): false,
 					notifyOptions = {
 						owner,
 						ownerModel,
 						title: 			title(message), 		// Subject line
-						text: 			text(message)
+						text: 			text(message),
 					};
+			if(link){
+				notifyOptions.link = link(message);
+			}
 			Notification.notify(notifyOptions)
 				.then((res)=>{
 					if(res.status === 'ok'){
