@@ -14,38 +14,46 @@ try{
 			return this;
 		}
 
-		deploy(message, rule){
+		async deploy(message, rule){
 			try{
-				let
-					options = {},
-					Notification = notNode.Application.getLogic('Notification');
-				if(rule && rule.getData()){
-					options = Object.assign(options, rule.getData());
-				}
-				let	text = hb.compile(options.templates.text),
-						title = hb.compile(options.templates.subject),
-						notifyOptions = {
-							owner: 		message.owner,
-							ownerModel: message.ownerModel,
-							title: 		title(message), 		// Subject line
-							text: 		text(message)
-						};
-				Notification.notify(notifyOptions)
-					.then((res)=>{
-						if(res.status === 'ok'){
-							let {_id, title, owner, ownerModel} = res.result;
-							log.log(`notify deployed: "${title}" to ${ownerModel}:${owner} with _id#${_id} `);
-						}else{
-							log.error(res);
-						}
-					})
-					.catch((e)=>{
-						log.error(e);
-					});
+				await this.deployCycle(message, rule);
 			}catch(e){
 				log.error(e);
 			}
 		}
+
+		async deployOne({message, recipient,  index, recipientsFilter, rule}){
+			const	Notification = notNode.Application.getLogic('Notification')
+			let
+				owner = recipient._id,
+				ownerModel = recipientsFilter.modelName,
+				options = {};
+
+			if(rule && rule.getData()){
+				options = Object.assign(options, rule.getData());
+			}
+
+			let	text = hb.compile(options.templates.text),
+					title = hb.compile(options.templates.subject),
+					notifyOptions = {
+						owner,
+						ownerModel,
+						title: 			title(message), 		// Subject line
+						text: 			text(message)
+					};
+			Notification.notify(notifyOptions)
+				.then((res)=>{
+					if(res.status === 'ok'){
+						log.log(`notify deployed: "${res.result.title}" to ${res.result.ownerModel}:${res.result.owner} with _id#${res.result._id} `);
+					}else{
+						log.error(res);
+					}
+				})
+				.catch((e)=>{
+					log.error(e);
+				});
+		}
+
 	}
 	module.exports = InformSinkNotification;
 
