@@ -1,6 +1,6 @@
 {
 	"name": "not-inform-sink-notification",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"description": "not-* family info sink via notification in not- environment",
 	"main": "index.js",
 	"scripts": {
@@ -30,7 +30,6 @@
 	"dependencies": {
 		"handlebars": "*",
 		"not-config": "*",
-		"not-inform": "*",
 		"not-path": "*"
 	},
 	"devDependencies": {
