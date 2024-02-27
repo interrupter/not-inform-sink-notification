@@ -1,6 +1,8 @@
 <script>
     export let value = false;
+    // svelte-ignore unused-export-let
     export let readonly;
+    // svelte-ignore unused-export-let
     export let disabled;
 </script>
 
