@@ -1,9 +1,15 @@
 <script>
-    export let value = false;
-    // svelte-ignore unused-export-let
-    export let readonly;
-    // svelte-ignore unused-export-let
-    export let disabled;
+    
+    
+    /**
+     * @typedef {Object} Props
+     * @property {boolean} [value]
+     * @property {any} readonly - svelte-ignore unused-export-let
+     * @property {any} disabled - svelte-ignore unused-export-let
+     */
+
+    /** @type {Props} */
+    let { value = false, readonly, disabled } = $props();
 </script>
 
 {#if value}
